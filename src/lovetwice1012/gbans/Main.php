@@ -68,7 +68,7 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
                 return true;
             }
-            if($this->ban($args[0],$srgs[1])){
+            if($this->ban($args[0],$args[1])){
                 $sender->sendMessage("グローバルbanしました。");
                 return true;
             }else{
