@@ -58,5 +58,48 @@ class Main extends PluginBase implements Listener
         }
         
     }
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool
+	{
+	    if ($command->getName() === "gban"){
+            
+            if (empty($args[0])){
+                $sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
+                return true;
+            }
+            if($this->ban($args[0],$srgs[1])){
+                $sender->sendMessage("グローバルbanしました。");
+                return true;
+            }else{
+                $sender->sendMessage("グローバルbanできませんでした。サーバーがサービスの提供を一時停止しているか、サーバー側でエラーが発生した可能性があります。");
+                return true;
+            }
+        }
+    }
+    
+    public function ban($name,$reason){
+        $url = 'http://passionalldb.s1008.xrea.com/gban/ban.php';
+
+        $data = array(
+            'ban' => 'ban',
+            'username' => $name,
+            'reason' => $reason
+        );
+
+        $context = array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => implode("\r\n", array('Content-Type: application/x-www-form-urlencoded',)),
+                'content' => http_build_query($data)
+            )
+        );
+
+        $result = file_get_contents($url, false, stream_context_create($context));
+        if($result=="success"){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
          
 }
