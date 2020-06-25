@@ -1,5 +1,10 @@
-name: dailymission
-main: lovetwice1012\daily\Main
-version: 2.0.0
+name: gbans
+main: lovetwice1012\gbans\Main
+version: 1.0.0
 api: 3.12.0
 auther: lovetwice1012
+
+commands:
+  gban:
+    description: 悪人よ。BANの鉄槌をくらえ！！
+    usage: /gban username reason
