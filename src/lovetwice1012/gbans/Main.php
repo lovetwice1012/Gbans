@@ -69,6 +69,11 @@ class Main extends PluginBase implements Listener
                 return true;
             }
             if($this->ban($args[0],$args[1])){
+            $player = Server::getServer()->getPlayer($args[0]);
+
+            if ($player instanceof Player){
+                $player->kick("§4あなたはbanされました。 \n§6理由 §f: §6$args[1] ", false);
+            }
                 $sender->sendMessage("グローバルbanしました。");
                 return true;
             }else{
