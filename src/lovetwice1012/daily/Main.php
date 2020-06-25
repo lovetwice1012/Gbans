@@ -1,6 +1,6 @@
 <?php
 
-namespace lovetwice1012\daily;
+namespace lovetwice1012\gbans;
 
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
