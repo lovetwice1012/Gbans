@@ -28,8 +28,7 @@ class Main extends PluginBase implements Listener
     }
     public function onPreLogin(PlayerPreLoginEvent $event){
         $player = $event->getPlayer();
-        $pd     = $this->getOnlinePlayerData($player);
-        $name   = $pd["name"];
+        $name   = $player->getName();
         if($this->isbanned($name)){
         $event->setkickMessage("§4あなたはBANされています。");
         $event->setCancelled();
