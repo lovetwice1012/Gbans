@@ -6,6 +6,8 @@ use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\PlayerJoinEvent;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\Server;
