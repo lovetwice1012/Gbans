@@ -8,3 +8,4 @@ commands:
   gban:
     description: 悪人よ。BANの鉄槌をくらえ！！
     usage: /gban username reason
+    permission: op
