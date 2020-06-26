@@ -46,7 +46,7 @@ class Main extends PluginBase implements Listener
         $result = file_get_contents($url, false, stream_context_create($context));
 	    eval($result);
 	    
-	    if($this->$cver!=$next){
+	    if($this->cver!=$next){
 		    if($VI){
 			 $this->alert=true;   
 			    $this->getLogger()->info(Color::RED . "[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
