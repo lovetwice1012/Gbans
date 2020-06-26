@@ -16,6 +16,8 @@ class Main extends PluginBase implements Listener
 {
     public $data;
     public $plugin;
+    public $cver = "1.2.1";
+    public $alert = false;
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);        
@@ -26,7 +28,32 @@ class Main extends PluginBase implements Listener
     {
 	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
-        $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);      
+        $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
+	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver.php';
+
+        $data = array(
+            'checkver' => 'checkver'
+        );
+
+        $context = array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => implode("\r\n", array('Content-Type: application/x-www-form-urlencoded',)),
+                'content' => http_build_query($data)
+            )
+        );
+
+        $result = file_get_contents($url, false, stream_context_create($context));
+	    eval($result);
+	    
+	    if($this->$cver!=$next){
+		    if($VI){
+			 $this->alert=true;   
+			    $this->getLogger()->info(Color::RED . "[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
+		    }else{
+			    $this->getLogger()->info(Color::RED . "[GBan]新しいバージョンがあります。アップデートしてください。");
+		    }
+	    }
     }
     public function onPreLogin(PlayerPreLoginEvent $event){
         $player = $event->getPlayer();
@@ -38,6 +65,11 @@ class Main extends PluginBase implements Listener
         	}
 	}
     }
+	public function onJoin(PlayerJoinEvent $event){
+	if($this->alert&&$event->getPlayer()->isOp()){
+		$event->getPlayer()->sendMessage("§4[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
+	}
+	}
     public function isbanned($name){
         $url = 'http://passionalldb.s1008.xrea.com/gban/check.php';
 
