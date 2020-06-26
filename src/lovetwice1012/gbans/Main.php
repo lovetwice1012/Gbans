@@ -68,7 +68,7 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
                 return true;
             }
-            if($this->ban($args[0],$args[1])){
+            if($this->ban($args[0],$args[1],$sender->getName())){
             $player = Server::getInstance()->getPlayer($args[0]);
 
             if ($player instanceof Player){
@@ -77,19 +77,20 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage("グローバルbanしました。");
                 return true;
             }else{
-                $sender->sendMessage("グローバルbanできませんでした。サーバーがサービスの提供を一時停止しているか、サーバー側でエラーが発生した可能性があります。");
+                $sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
                 return true;
             }
         }
     }
     
-    public function ban($name,$reason){
-        $url = 'http://passionalldb.s1008.xrea.com/gban/ban.php';
+    public function ban($name,$reason,$user){
+        $url = 'http://passionalldb.s1008.xrea.com/gban/ban2.php';
 
         $data = array(
             'ban' => 'ban',
             'username' => $name,
-            'reason' => $reason
+            'reason' => $reason,
+	    'user' => $user
         );
 
         $context = array(
