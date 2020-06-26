@@ -11,6 +11,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\Server;
+use pocketmine\utils\TextFormat as Color;
 
 class Main extends PluginBase implements Listener
 {
