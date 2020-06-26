@@ -16,7 +16,7 @@ class Main extends PluginBase implements Listener
 {
     public $data;
     public $plugin;
-    public $cver = "1.2.1";
+    public $cver = "1.2.0";
     public $alert = false;
     public function onEnable()
     {
