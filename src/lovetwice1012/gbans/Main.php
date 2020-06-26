@@ -24,17 +24,19 @@ class Main extends PluginBase implements Listener
     }    
     public function load()
     {
+	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
-        //まだ準備できてない
-        //$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);      
+        $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);      
     }
     public function onPreLogin(PlayerPreLoginEvent $event){
         $player = $event->getPlayer();
         $name   = $player->getName();
-        if($this->isbanned($name)){
-        $event->setkickMessage("§4あなたはBANされています。");
-        $event->setCancelled();
-        }
+	if(!$this->config->exists($name)){
+        	if($this->isbanned($name)){
+        	$event->setkickMessage("§4あなたはBANされています。");
+        	$event->setCancelled();
+        	}
+	}
     }
     public function isbanned($name){
         $url = 'http://passionalldb.s1008.xrea.com/gban/check.php';
