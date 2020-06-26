@@ -108,6 +108,5 @@ class Main extends PluginBase implements Listener
             return false;
         }
         
-    }
-         
+    }      
 }
