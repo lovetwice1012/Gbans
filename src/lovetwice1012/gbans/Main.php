@@ -64,12 +64,12 @@ class Main extends PluginBase implements Listener
 	{
 	    if ($command->getName() === "gban"){
             
-            if (empty($args[0])){
+            if (empty($args[0])||empty($args[1])){
                 $sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
                 return true;
             }
             if($this->ban($args[0],$args[1],$sender->getName())){
-            $player = Server::getInstance()->getPlayer($args[0]);
+            $player = Server::getInstance()->getPlayer($args[1]);
 
             if ($player instanceof Player){
                 $player->kick("§4あなたはbanされました。 \n§6理由 §f: §6$args[1] ", false);
