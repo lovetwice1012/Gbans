@@ -30,6 +30,7 @@ class Main extends PluginBase implements Listener
 	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
         $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
+        try{
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
@@ -56,7 +57,12 @@ class Main extends PluginBase implements Listener
 			    $this->getLogger()->info(Color::RED . "[GBan]新しいバージョンがあります。アップデートしてください。");
 		    }
 	    }
-    }
+    
+}catch(){
+$this->getLogger()->info(Color::RED . "[GBan]バージョン確認に失敗しました。");
+	
+}
+}
     public function onPreLogin(PlayerPreLoginEvent $event){
         $player = $event->getPlayer();
         $name   = $player->getName();
@@ -68,11 +74,44 @@ class Main extends PluginBase implements Listener
 	}
     }
 	public function onJoin(PlayerJoinEvent $event){
+try{
+	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
+
+        $data = array(
+            'checkver' => 'checkver'
+        );
+
+        $context = array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => implode("\r\n", array('Content-Type: application/x-www-form-urlencoded',)),
+                'content' => http_build_query($data)
+            )
+        );
+
+        $result = file_get_contents($url, false, stream_context_create($context));
+	    $data=json_decode($result);
+	    $next = $data[0];
+	    $VI = $data[1];
+	    if($this->cver!=$next){
+		    if($VI){
+			 $this->alert=true;   
+			    $this->getLogger()->info(Color::RED . "[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
+		    }else{
+			    $this->getLogger()->info(Color::RED . "[GBan]新しいバージョンがあります。アップデートしてください。");
+		    }
+	    }
+    
+}catch(){
+$this->getLogger()->info(Color::RED . "[GBan]バージョン確認に失敗しました。");
+	
+}
 	if($this->alert&&$event->getPlayer()->isOp()){
 		$event->getPlayer()->sendMessage("§4[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
 	}
 	}
     public function isbanned($name){
+try{
         $url = 'http://passionalldb.s1008.xrea.com/gban/check.php';
 
         $data = array(
@@ -94,7 +133,9 @@ class Main extends PluginBase implements Listener
         }else{
             return false;
         }
-        
+        }catch(){
+return false; 
+}
     }
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool
 	{
@@ -120,6 +161,7 @@ class Main extends PluginBase implements Listener
     }
     
     public function ban($name,$reason,$user){
+try{
         $url = 'http://passionalldb.s1008.xrea.com/gban/ban2.php';
 
         $data = array(
@@ -143,6 +185,9 @@ class Main extends PluginBase implements Listener
         }else{
             return false;
         }
-        
+        }catch(){
+return false;
+}
     }      
+
 }
