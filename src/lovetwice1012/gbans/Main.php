@@ -30,7 +30,7 @@ class Main extends PluginBase implements Listener
 	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
         $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
-	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver.php';
+	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
             'checkver' => 'checkver'
@@ -45,8 +45,9 @@ class Main extends PluginBase implements Listener
         );
 
         $result = file_get_contents($url, false, stream_context_create($context));
-	    eval($result);
-	    
+	    $data=json_decode($result);
+	    $next = $data[0];
+	    $VI = $data[1];
 	    if($this->cver!=$next){
 		    if($VI){
 			 $this->alert=true;   
