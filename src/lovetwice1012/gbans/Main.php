@@ -128,7 +128,7 @@ class Main extends PluginBase implements Listener
     }
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool
 	{
-	    if ($sender instanceof Player){
+	    if (!$sender instanceof Player){
 		    $this->getLogger()->info(Color::RED . "コンソールからの操作はサポート外になりました。");
 	            return true;
 	    }
