@@ -19,6 +19,7 @@ class Main extends PluginBase implements Listener
     public $plugin;
     public $cver = "1.4.0";
     public $alert = false;
+    public $message;
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);        
@@ -147,8 +148,9 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage("グローバルbanしました。");
                 return true;
             }else{
-                $sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
-                return true;
+		    $sender->sendMessage($this->message);
+                    $sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
+                    return true;
             }
 	    }
             if ($command->getName() === "gunban"){
@@ -162,9 +164,10 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage("グローバルunbanしました。");
                 return true;
             }else{
-                $sender->sendMessage("グローバルunbanできませんでした。このサーバーからやあなたからのUNBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおいて再度試してみてください。");
-                $sender->sendMessage("§4[注意]UNBANはBANした人本人がUNBANしていて、BANした時にいたサーバーで行わないと拒否されます。");
-		return true;
+                    $sender->sendMessage($this->message);
+		    $sender->sendMessage("グローバルunbanできませんでした。このサーバーからやあなたからのUNBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおいて再度試してみてください。");
+                    $sender->sendMessage("§4[注意]UNBANはBANした人本人がUNBANしていて、BANした時にいたサーバーで行わないと拒否されます。");
+		    return true;
             }
         }
     }
@@ -192,6 +195,7 @@ class Main extends PluginBase implements Listener
         if($result=="success"){
             return true;
         }else{
+	    $this->message = $result;
             return false;
         }
         
@@ -218,6 +222,7 @@ class Main extends PluginBase implements Listener
         if($result=="success"){
             return true;
         }else{
+	    $this->message = $result;
             return false;
         }
         
