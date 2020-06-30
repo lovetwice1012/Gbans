@@ -128,7 +128,7 @@ class Main extends PluginBase implements Listener
     }
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool
 	{
-	    if ($player instanceof Player){
+	    if ($sender instanceof Player){
 		    $this->getLogger()->info(Color::RED . "コンソールからの操作はサポート外になりました。");
 	            return true;
 	    }
@@ -152,11 +152,11 @@ class Main extends PluginBase implements Listener
             }
             if ($command->getName() === "gunban"){
             
-            if (empty($args[0])||empty($args[1])){
+            if (empty($args[0])){
                 $sender->sendMessage(" §b使い方 : /gunban <プレイヤーのゲーマータグ>");
                 return true;
             }
-            if($this->unban($args[0],$args[1],$sender->getName())){
+            if($this->unban($args[0],$sender->getName())){
            
                 $sender->sendMessage("グローバルunbanしました。");
                 return true;
@@ -166,7 +166,7 @@ class Main extends PluginBase implements Listener
 		return true;
             }
         }
-    }
+    ]
     
     public function ban($name,$reason,$user){
 
@@ -195,7 +195,7 @@ class Main extends PluginBase implements Listener
         }
         
     }      
-    public function unban($name,$reason,$user){
+    public function unban($name,$user){
 
         $url = 'http://passionalldb.s1008.xrea.com/gban/unban.php';
 
