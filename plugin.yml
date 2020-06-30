@@ -9,3 +9,7 @@ commands:
     description: 悪人よ。BANの鉄槌をくらえ！！
     usage: /gban username reason
     permission: op
+  gunban:
+    description: あ、悪人は君じゃなかったんだね…
+    usage: /gban username
+    permission: op
