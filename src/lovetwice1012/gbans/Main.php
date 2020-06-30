@@ -17,7 +17,7 @@ class Main extends PluginBase implements Listener
 {
     public $data;
     public $plugin;
-    public $cver = "1.3.1";
+    public $cver = "1.4.0";
     public $alert = false;
     public function onEnable()
     {
@@ -30,7 +30,6 @@ class Main extends PluginBase implements Listener
 	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
         $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
-        try{
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
@@ -45,7 +44,7 @@ class Main extends PluginBase implements Listener
             )
         );
 
-        $result = file_get_contents($url, false, stream_context_create($context));
+        $result = @file_get_contents($url, false, stream_context_create($context));
 	    $data=json_decode($result);
 	    $next = $data[0];
 	    $VI = $data[1];
@@ -57,11 +56,6 @@ class Main extends PluginBase implements Listener
 			    $this->getLogger()->info(Color::RED . "[GBan]新しいバージョンがあります。アップデートしてください。");
 		    }
 	    }
-    
-}catch(){
-$this->getLogger()->info(Color::RED . "[GBan]バージョン確認に失敗しました。");
-	
-}
 }
     public function onPreLogin(PlayerPreLoginEvent $event){
         $player = $event->getPlayer();
