@@ -74,7 +74,7 @@ $this->getLogger()->info(Color::RED . "[GBan]バージョン確認に失敗し�
 	}
     }
 	public function onJoin(PlayerJoinEvent $event){
-try{
+
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
@@ -89,7 +89,7 @@ try{
             )
         );
 
-        $result = file_get_contents($url, false, stream_context_create($context));
+        $result = @file_get_contents($url, false, stream_context_create($context));
 	    $data=json_decode($result);
 	    $next = $data[0];
 	    $VI = $data[1];
@@ -102,16 +102,13 @@ try{
 		    }
 	    }
     
-}catch(){
-$this->getLogger()->info(Color::RED . "[GBan]バージョン確認に失敗しました。");
-	
-}
+
 	if($this->alert&&$event->getPlayer()->isOp()){
 		$event->getPlayer()->sendMessage("§4[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
 	}
 	}
     public function isbanned($name){
-try{
+
         $url = 'http://passionalldb.s1008.xrea.com/gban/check.php';
 
         $data = array(
@@ -127,18 +124,20 @@ try{
             )
         );
 
-        $result = file_get_contents($url, false, stream_context_create($context));
+        $result = @file_get_contents($url, false, stream_context_create($context));
         if($result=="Banned"){
             return true;
         }else{
             return false;
         }
-        }catch(){
-return false; 
-}
+      
     }
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool
 	{
+	    if ($player instanceof Player){
+		    $this->getLogger()->info(Color::RED . "コンソールからの操作はサポート外になりました。");
+	            return true;
+	    }
 	    if ($command->getName() === "gban"){
             
             if (empty($args[0])||empty($args[1])){
@@ -157,11 +156,26 @@ return false;
                 $sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
                 return true;
             }
+            if ($command->getName() === "gunban"){
+            
+            if (empty($args[0])||empty($args[1])){
+                $sender->sendMessage(" §b使い方 : /gunban <プレイヤーのゲーマータグ>");
+                return true;
+            }
+            if($this->unban($args[0],$args[1],$sender->getName())){
+           
+                $sender->sendMessage("グローバルunbanしました。");
+                return true;
+            }else{
+                $sender->sendMessage("グローバルunbanできませんでした。このサーバーからやあなたからのUNBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおいて再度試してみてください。");
+                $sender->sendMessage("§4[注意]UNBANはBANした人本人がUNBANしていて、BANした時にいたサーバーで行わないと拒否されます。");
+		return true;
+            }
         }
     }
     
     public function ban($name,$reason,$user){
-try{
+
         $url = 'http://passionalldb.s1008.xrea.com/gban/ban2.php';
 
         $data = array(
@@ -179,15 +193,39 @@ try{
             )
         );
 
-        $result = file_get_contents($url, false, stream_context_create($context));
+        $result = @file_get_contents($url, false, stream_context_create($context));
         if($result=="success"){
             return true;
         }else{
             return false;
         }
-        }catch(){
-return false;
-}
+        
+    }      
+    public function unban($name,$reason,$user){
+
+        $url = 'http://passionalldb.s1008.xrea.com/gban/unban.php';
+
+        $data = array(
+            'unban' => 'unban',
+            'username' => $name,
+            'user' => $user
+        );
+
+        $context = array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => implode("\r\n", array('Content-Type: application/x-www-form-urlencoded',)),
+                'content' => http_build_query($data)
+            )
+        );
+
+        $result = @file_get_contents($url, false, stream_context_create($context));
+        if($result=="success"){
+            return true;
+        }else{
+            return false;
+        }
+        
     }      
 
 }
