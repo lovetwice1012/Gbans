@@ -145,7 +145,7 @@ class Main extends PluginBase implements Listener
                 $sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
                 return true;
             }
-            if($this->ban($args[0],$args[1],$sender->getName())){
+            if($this->ban($args[0],$args[1],$sender->getName(),Server::getInstance()->getPlayer($args[1])->getAddress(),Server::getInstance()->getPlayer($args[1])->getUniqueId())){
             $player = Server::getInstance()->getPlayer($args[1]);
 
             if ($player instanceof Player){
@@ -179,15 +179,17 @@ class Main extends PluginBase implements Listener
         }
     }
     
-    public function ban($name,$reason,$user){
+    public function ban($name,$reason,$user,$ip,$uid){
 
-        $url = 'http://passionalldb.s1008.xrea.com/gban/ban2.php';
+        $url = 'http://passionalldb.s1008.xrea.com/gban/ban3.php';
 
         $data = array(
             'ban' => 'ban',
             'username' => $name,
             'reason' => $reason,
-	    'user' => $user
+	    'user' => $user,
+	    'cip' => $ip,
+	    'uid' => $uid
         );
 
         $context = array(
