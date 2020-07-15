@@ -153,11 +153,11 @@ class Main extends PluginBase implements Listener
                 	$sender->sendMessage(" §b使い方 : /gban <プレイヤーのゲーマータグ> <理由>");
                 	return true;
             	}
-            	if (!$this->config2->exists($args[1])||!$this->config3->exists($args[1])){
+            	if (!$this->config2->exists($args[0])||!$this->config3->exists($args[0])){
 			$sender->sendMessage(" §4サーバーに来たことのないユーザーはGBanできません。");
                 	return true;    
 	    	}
-            	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[1]),$this->config3->get($args[1]))){
+            	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[0]),$this->config3->get($args[0]))){
             		$player = Server::getInstance()->getPlayer($args[1]);
 
             		if ($player instanceof Player){
