@@ -155,7 +155,7 @@ class Main extends PluginBase implements Listener
 		$sender->sendMessage(" §4サーバーに来たことのないユーザーはGBanできません。");
                 return true;    
 	    }
-            if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[1]),$this->config3->get($args[1])){
+            if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[1]),$this->config3->get($args[1]))){
             $player = Server::getInstance()->getPlayer($args[1]);
 
             if ($player instanceof Player){
