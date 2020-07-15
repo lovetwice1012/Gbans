@@ -70,9 +70,9 @@ class Main extends PluginBase implements Listener
 	$player = $event->getPlayer();
         $name   = $player->getName();
 	$cip = $player->getAddress();
-    	$uid = $player->getUniqueId();
+    	$uid = (string)$player->getUniqueId();
 	if(!$this->config->exists($name)){
-        	if($this->isbanned($name,$cip,$uid)){
+        	if($this->isbanned($name,$cip,(string)$uid)){
         		$event->setkickMessage("§4あなたはBANされています。");
         		$event->setCancelled();
         	}
@@ -161,7 +161,7 @@ class Main extends PluginBase implements Listener
 			$sender->sendMessage(" §4サーバーに来たことのないユーザーはGBanできません。");
                 	return true;    
 	    	}
-            	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[0]),$this->config3->get($args[0]))){
+            	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[0]),(string)$this->config3->get($args[0]))){
             		$player = Server::getInstance()->getPlayer($args[0]);
 
             		if ($player instanceof Player){
