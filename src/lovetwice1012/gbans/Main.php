@@ -74,7 +74,10 @@ class Main extends PluginBase implements Listener
 	}
     }
 	public function onJoin(PlayerJoinEvent $event){
-
+            $cip = $player->getAddress();
+    	    $uid = $player->getUniqueId();
+            $this->config2->set($name,$cip);
+            $this->config3->set($name,$uid);
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
