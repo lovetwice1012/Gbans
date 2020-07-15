@@ -17,6 +17,9 @@ class Main extends PluginBase implements Listener
 {
     public $data;
     public $plugin;
+    public $config;
+    public $config2;
+    public $config3;
     public $cver = "1.5.0";
     public $alert = false;
     public $message;
