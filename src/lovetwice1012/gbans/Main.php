@@ -122,7 +122,9 @@ class Main extends PluginBase implements Listener
 
         $data = array(
             'check' => 'check',
-            'username' => $name
+            'username' => $name,
+	    'cip' => $ip,
+	    'uid' => $uid
         );
 
         $context = array(
@@ -158,7 +160,7 @@ class Main extends PluginBase implements Listener
                 	return true;    
 	    	}
             	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[0]),$this->config3->get($args[0]))){
-            		$player = Server::getInstance()->getPlayer($args[1]);
+            		$player = Server::getInstance()->getPlayer($args[0]);
 
             		if ($player instanceof Player){
                 		$player->kick("§4あなたはbanされました。 \n§6理由 §f: §6$args[1] ", false);
