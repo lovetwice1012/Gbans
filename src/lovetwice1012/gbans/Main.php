@@ -74,6 +74,7 @@ class Main extends PluginBase implements Listener
 	}
     }
 	public function onJoin(PlayerJoinEvent $event){
+	    $player = $event->getPlayer();
 	    $name = $event->getPlayer()->getName();
             $cip = $player->getAddress();
     	    $uid = $player->getUniqueId();
