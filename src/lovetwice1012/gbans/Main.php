@@ -169,7 +169,7 @@ class Main extends PluginBase implements Listener
 			//$sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
                 	return true;
             	}
-	        return true;
+	     
 	    } 
             if ($command->getName() === "gunban"){
             
@@ -187,9 +187,9 @@ class Main extends PluginBase implements Listener
                     	$sender->sendMessage("§4[注意]UNBANはBANした人本人がUNBANしていて、BANした時にいたサーバーで行わないと拒否されます。");
 		    	return true;
             	}
-		return true;
+		
        	    }
-	    return true;
+	    
     }
     
     public function ban($name,$reason,$user,$ip,$uid){
