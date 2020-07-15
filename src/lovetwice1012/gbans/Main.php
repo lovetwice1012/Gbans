@@ -31,6 +31,8 @@ class Main extends PluginBase implements Listener
 	if (!(file_exists($this->getDataFolder()))) @mkdir($this->getDataFolder());
         date_default_timezone_set('Asia/Tokyo');
         $this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
+	$this->config2 = new Config($this->getDataFolder() . "cip.yml", Config::YAML);
+        $this->config3 = new Config($this->getDataFolder() . "uid.yml", Config::YAML);
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         $data = array(
