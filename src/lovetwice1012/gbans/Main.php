@@ -83,6 +83,8 @@ class Main extends PluginBase implements Listener
     	    $uid = $player->getUniqueId();
             $this->config2->set($name,$cip);
             $this->config3->set($name,$uid);
+	    $this->config2->save();
+            $this->config3->save();
 	    $url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 	    $data = array(
             	'checkver' => 'checkver'
