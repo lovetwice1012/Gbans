@@ -69,8 +69,10 @@ class Main extends PluginBase implements Listener
     public function onPreLogin(PlayerPreLoginEvent $event){
 	$player = $event->getPlayer();
         $name   = $player->getName();
+	$cip = $player->getAddress();
+    	$uid = $player->getUniqueId();
 	if(!$this->config->exists($name)){
-        	if($this->isbanned($name)){
+        	if($this->isbanned($name,$cip,$uid)){
         		$event->setkickMessage("§4あなたはBANされています。");
         		$event->setCancelled();
         	}
@@ -116,7 +118,7 @@ class Main extends PluginBase implements Listener
 		$event->getPlayer()->sendMessage("§4[GBan]とても重要なアップデートがあります。アップデートしないと、GBanの動作に致命的な影響を及ぼす可能性があります。すぐにアップデートをしてください。");
 	    }
 	}
-    public function isbanned($name){
+    public function isbanned($name,$ip,$uid){
 
         $url = 'http://passionalldb.s1008.xrea.com/gban/check3.php';
 
