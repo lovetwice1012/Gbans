@@ -36,6 +36,7 @@ class Main extends PluginBase implements Listener
         	$this->config = new Config($this->getDataFolder() . "whitelist.yml", Config::YAML);
 		$this->config2 = new Config($this->getDataFolder() . "cip.yml", Config::YAML);
         	$this->config3 = new Config($this->getDataFolder() . "uid.yml", Config::YAML);
+        	$this->config4 = new Config($this->getDataFolder() . "licensekey.yml", Config::YAML);
 	    	$url = 'http://passionalldb.s1008.xrea.com/gban/ver2.php';
 
         	$data = array(
@@ -65,6 +66,7 @@ class Main extends PluginBase implements Listener
 	    	}else{
 			$this->alert=false;      
 	    	}
+	    	
     }
     public function onPreLogin(PlayerPreLoginEvent $event){
 	$player = $event->getPlayer();
