@@ -166,7 +166,9 @@ class Main extends PluginBase implements Listener
 	    	}
             	if($this->ban($args[0],$args[1],$sender->getName(),$this->config2->get($args[0]),(string)$this->config3->get($args[0]))){
             		$player = Server::getInstance()->getPlayer($args[0]);
-                        $player->setBanned(true);
+                        if ($player instanceof Player){
+			    $player->setBanned(true);
+	                }	    
 		  	$sender->sendMessage("グローバルbanしました。このサーバーのBANリストに自動で追加しました。 response: \"".$this->message."\"");  
                	 	return true;
            	}else{
@@ -182,7 +184,6 @@ class Main extends PluginBase implements Listener
                 	return true;
             	}
             	if($this->unban($args[0],$sender->getName())){
-			$player->setBanned(false);
            		$sender->sendMessage("このサーバーからの被害の報告を取り消しました。 response: \"".$this->message."\"");
                 	return true;
             	}else{
