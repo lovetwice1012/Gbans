@@ -174,7 +174,7 @@ class Main extends PluginBase implements Listener
                	 	//$sender->sendMessage("グローバルbanしました。");
                	 	return true;
            	}else{
-			$sender->sendMessage("グローバルbanできませんでした。このサーバーのBANリストには自動で追加されません。手動で追加して下さい。しばらく後に再実行して下さい。 response: \""$this->message."\"");
+			$sender->sendMessage("グローバルbanできませんでした。このサーバーのBANリストには自動で追加されません。手動で追加して下さい。しばらく後に再実行して下さい。 response: \"".$this->message."\"");
 			//$sender->sendMessage("グローバルbanできませんでした。このサーバーからやあなたからのBAN申請がブロックされているか、サーバーがサービスの提供を一時停止している、もしくはサーバー側でエラーが発生した可能性があります。Gbanプラグインを最新版にアップデートすると解決する場合があります。それでも解決しない場合はしばらく時間をおくか、公式discord-bot「GBans-official」を使用してBanを試みてください。");
                 	return true;
             	}
