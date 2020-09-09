@@ -190,7 +190,7 @@ class Main extends PluginBase implements Listener
             	}
 		
        	    }
-	    
+	    return true;
     }
     
     public function ban($name,$reason,$user,$ip,$uid){
