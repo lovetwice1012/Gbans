@@ -182,6 +182,7 @@ class Main extends PluginBase implements Listener
                 	return true;
             	}
             	if($this->unban($args[0],$sender->getName())){
+			$player->setBanned(false);
            		$sender->sendMessage("このサーバーからの被害の報告を取り消しました。 response: \"".$this->message."\"");
                 	return true;
             	}else{
