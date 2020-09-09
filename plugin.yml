@@ -1,15 +1,17 @@
 name: gbans
 main: lovetwice1012\gbans\Main
-version: 1.5.0
-api: 3.12.0
+version: 1.6.0
+api: 
+  - 3.0.0
+  - 4.0.0
 auther: lovetwice1012
 
 commands:
   gban:
-    description: 悪人よ。BANの鉄槌をくらえ！！
+    description: ユーザーをGbanします。
     usage: /gban username reason
     permission: op
   gunban:
-    description: あ、悪人は君じゃなかったんだね…
+    description: ユーザーのGbanを取り消します。
     usage: /gban username
     permission: op
