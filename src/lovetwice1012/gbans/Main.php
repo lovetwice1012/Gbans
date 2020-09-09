@@ -169,10 +169,10 @@ class Main extends PluginBase implements Listener
                         if ($player instanceof Player){
 			    $player->setBanned(true);
 	                }	    
-		  	$sender->sendMessage("グローバルbanしました。このサーバーのBANリストに自動で追加しました。 response: \"".$this->message."\"");  
+		  	$sender->sendMessage("グローバルbanしました。response: \"".$this->message."\"");  
                	 	return true;
            	}else{
-			$sender->sendMessage("グローバルbanできませんでした。このサーバーのBANリストには自動で追加されません。手動で追加して下さい。しばらく後に再実行して下さい。 response: \"".$this->message."\"");
+			$sender->sendMessage("グローバルbanできませんでした。しばらく後に再実行して下さい。 response: \"".$this->message."\"");
                 	return true;
             	}
 	     
