@@ -1,6 +1,6 @@
 name: gbans
 main: lovetwice1012\gbans\Main
-version: 1.6.0
+version: 1.7.0
 api: 
   - 3.0.0
   - 4.0.0
@@ -13,5 +13,5 @@ commands:
     permission: op
   gunban:
     description: ユーザーのGbanを取り消します。
-    usage: /gban username
+    usage: /gunban username
     permission: op
